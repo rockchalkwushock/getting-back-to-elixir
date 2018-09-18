@@ -6,24 +6,13 @@ defmodule FizzBuzz do
   # when multiple of 15 return 'fizzbuzz'
   # when no case matched return number
 
-  def run(n) do
-    range = 0..n
-    print_numbers(range)
-  end
+  def classify_range(n) when is_integer(n), do: Enum.each(0..n, &classify/1)
 
-  def print_numbers(range) do
-    Enum.map(range, fn num ->
-      cond do
-        rem(num, 15) == 0 ->
-          IO.puts('FizzBuzz')
-        rem(num, 3) == 0 ->
-          IO.puts('Fizz')
-        rem(num, 5) == 0 ->
-          IO.puts('Buzz')
-        true ->
-          IO.puts(num)
-      end
-      end
-      )
-  end
+  # Use gaurd clause in lieu of cond statement.
+  # classify/1 will take in the num from the range and output
+  # based on the gaurd clauses.
+  def classify(x) when rem(x, 15) == 0, do: "FizzBuzz"
+  def classify(x) when rem(x, 3) == 0, do: "Fizz"
+  def classify(x) when rem(x, 5) == 0, do: "Buzz"
+  def classify(x), do: x
 end
